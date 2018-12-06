@@ -1,21 +1,33 @@
 import React, { Component } from 'react';
 import './App.css';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import { Switch, Route, Link } from 'react-router-dom'
+import AboutPage from './components/AboutPage'
+import UserPage from './components/UserPage'
+import NotFoundPage from './components/NotFoundPage'
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Router>
-          <div>
-            <ul>
-              <li>
-                <Link to="/about">about</Link>
-              </li>
-            </ul>
-            <Route path="/about" component={() => <h2>About</h2>} />
-          </div>
-        </Router>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/user">User</Link>
+            </li>
+          </ul>
+        </nav>
+        <Switch>
+          <Route path="/" exact component={() => <h1>Home</h1>} />
+          <Route path="/about" component={AboutPage} />
+          <Route path="/user" component={UserPage} />
+          <Route component={NotFoundPage} />
+        </Switch>
       </div>
     );
   }
